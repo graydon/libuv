@@ -681,6 +681,8 @@ int uv_udp_set_broadcast(uv_udp_t* handle, int value) {
 
 SOCKOPT_SETTER(multicast_loop, IP_MULTICAST_LOOP, IPV6_MULTICAST_LOOP)
 SOCKOPT_SETTER(multicast_ttl, IP_MULTICAST_TTL, IPV6_MULTICAST_HOPS)
-SOCKOPT_SETTER(ttl, IP_TTL, IPV6_HOPLIMIT)
+#ifndef __MINGW32__
+ SOCKOPT_SETTER(ttl, IP_TTL, IPV6_HOPLIMIT)
+#endif
 
 #undef SOCKOPT_SETTER

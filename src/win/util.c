@@ -372,6 +372,12 @@ uv_err_t uv_resident_set_memory(size_t* rss) {
   HANDLE current_process;
   PROCESS_MEMORY_COUNTERS pmc;
 
+#ifdef __MINGW32__
+
+  *rss = 0;
+
+#else
+
   current_process = GetCurrentProcess();
 
   if (!GetProcessMemoryInfo(current_process, &pmc, sizeof(pmc))) {
@@ -379,6 +385,8 @@ uv_err_t uv_resident_set_memory(size_t* rss) {
   }
 
   *rss = pmc.WorkingSetSize;
+
+#endif
 
   return uv_ok_;
 }
@@ -484,6 +492,7 @@ void uv_free_cpu_info(uv_cpu_info_t* cpu_infos, int count) {
   free(cpu_infos);
 }
 
+#ifndef __MINGW32__
 
 uv_err_t uv_interface_addresses(uv_interface_address_t** addresses,
     int* count) {
@@ -579,6 +588,7 @@ uv_err_t uv_interface_addresses(uv_interface_address_t** addresses,
   return uv_ok_;
 }
 
+#endif
 
 void uv_free_interface_addresses(uv_interface_address_t* addresses,
     int count) {
