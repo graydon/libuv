@@ -23,7 +23,9 @@
 #define HAVE_MEMORY_H 1
 
 /* pread(2) and pwrite(2) are available */
+#if !defined(RUST_SNAPSHOT)
 #define HAVE_PREADWRITE 1
+#endif
 
 /* readahead(2) is available (linux) */
 #define HAVE_READAHEAD 1
@@ -44,7 +46,7 @@
 #define HAVE_STRING_H 1
 
 /* sync_file_range(2) is available if kernel >= 2.6.17 and glibc >= 2.6 */
-#if LINUX_VERSION_CODE >= 0x020611 && __GLIBC_PREREQ(2, 6)
+#if LINUX_VERSION_CODE >= 0x020611 && __GLIBC_PREREQ(2, 6) && !defined(RUST_SNAPSHOT)
 #define HAVE_SYNC_FILE_RANGE 1
 #else
 #define HAVE_SYNC_FILE_RANGE 0

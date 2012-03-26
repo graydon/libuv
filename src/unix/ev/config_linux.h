@@ -14,21 +14,21 @@
 #define HAVE_DLFCN_H 1
 
 /* epoll_ctl(2) is available if kernel >= 2.6.9 and glibc >= 2.4 */
-#if LINUX_VERSION_CODE >= 0x020609 && __GLIBC_PREREQ(2, 4)
+#if LINUX_VERSION_CODE >= 0x020609 && __GLIBC_PREREQ(2, 4) && !defined(RUST_SNAPSHOT)
 #define HAVE_EPOLL_CTL 1
 #else
 #define HAVE_EPOLL_CTL 0
 #endif
 
 /* eventfd(2) is available if kernel >= 2.6.22 and glibc >= 2.8 */
-#if LINUX_VERSION_CODE >= 0x020616 && __GLIBC_PREREQ(2, 8)
+#if LINUX_VERSION_CODE >= 0x020616 && __GLIBC_PREREQ(2, 8) && !defined(RUST_SNAPSHOT)
 #define HAVE_EVENTFD 1
 #else
 #define HAVE_EVENTFD 0
 #endif
 
 /* inotify_init(2) is available if kernel >= 2.6.13 and glibc >= 2.4 */
-#if LINUX_VERSION_CODE >= 0x02060d && __GLIBC_PREREQ(2, 4)
+#if LINUX_VERSION_CODE >= 0x02060d && __GLIBC_PREREQ(2, 4) && !defined(RUST_SNAPSHOT)
 #define HAVE_INOTIFY_INIT 1
 #else
 #define HAVE_INOTIFY_INIT 0
@@ -68,7 +68,7 @@
 #define HAVE_SELECT 1
 
 /* signalfd(2) is available if kernel >= 2.6.22 and glibc >= 2.8 */
-#if LINUX_VERSION_CODE >= 0x020616 && __GLIBC_PREREQ(2, 8)
+#if LINUX_VERSION_CODE >= 0x020616 && __GLIBC_PREREQ(2, 8) && !defined(RUST_SNAPSHOT)
 #define HAVE_SIGNALFD 1
 #else
 #define HAVE_SIGNALFD 0
