@@ -266,7 +266,15 @@ static int gettimeofday(struct timeval *tv, struct timezone *tz)
 
   #include <sys/time.h>
   #include <sys/select.h>
+#if defined(ANDROID)
+  #include <sys/vfs.h>
+  #include <linux/fs.h>
+  #define statvfs statfs
+  #define fstatvfs fstatfs
+#else
   #include <sys/statvfs.h>
+#endif
+  
   #include <unistd.h>
   #include <signal.h>
   #include <dirent.h>
@@ -1012,7 +1020,7 @@ eio__pwrite (int fd, void *buf, size_t count, off_t offset)
 
 # undef utimes
 # define utimes(path,times)  eio__utimes (path, times)
-
+#include <utime.h>
 static int
 eio__utimes (const char *filename, const struct timeval times[2])
 {

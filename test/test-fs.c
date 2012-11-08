@@ -30,6 +30,15 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 
+#if defined(ANDROID)
+	#ifndef S_IWRITE
+	#define S_IWRITE 0200
+	#endif
+	#ifndef S_IREAD
+	#define S_IREAD 0400
+	#endif
+#endif
+
 
 #if UNIX
 #include <unistd.h> /* unlink, rmdir, etc. */
@@ -497,12 +506,14 @@ static void check_utime(const char* path, double atime, double mtime) {
 #if _WIN32
   ASSERT(s->st_atime == atime);
   ASSERT(s->st_mtime == mtime);
-#elif !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-  ASSERT(s->st_atimespec.tv_sec  == atime);
-  ASSERT(s->st_mtimespec.tv_sec  == mtime);
-#else
-  ASSERT(s->st_atim.tv_sec  == atime);
-  ASSERT(s->st_mtim.tv_sec  == mtime);
+#elif !defined(ANDROID)
+	#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE) 
+	  ASSERT(s->st_atimespec.tv_sec  == atime);
+	  ASSERT(s->st_mtimespec.tv_sec  == mtime);
+	#else 
+	  ASSERT(s->st_atim.tv_sec  == atime);
+	  ASSERT(s->st_mtim.tv_sec  == mtime);
+	#endif
 #endif
 
   uv_fs_req_cleanup(&req);

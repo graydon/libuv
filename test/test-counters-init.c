@@ -37,6 +37,15 @@
 # define close _close
 #endif
 
+#if defined(ANDROID)
+	#ifndef S_IWRITE
+	#define S_IWRITE 0200
+	#endif
+	#ifndef S_IREAD
+	#define S_IREAD 0400
+	#endif
+#endif
+
 static char exepath[1024];
 static size_t exepath_size = 1024;
 static char* args[3];

@@ -23,7 +23,11 @@
 #include "task.h"
 #include <string.h>
 
-
+#if defined(ANDROID)
+TEST_IMPL(platform_output) {
+	return 0;
+}
+#else
 TEST_IMPL(platform_output) {
   char buffer[512];
   size_t rss;
@@ -81,3 +85,4 @@ TEST_IMPL(platform_output) {
 
   return 0;
 }
+#endif
