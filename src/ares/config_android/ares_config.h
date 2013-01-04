@@ -53,7 +53,79 @@
 #define HAVE_ARPA_INET_H 1
 
 /* Define to 1 if you have the <arpa/nameser_compat.h> header file. */
-#define HAVE_ARPA_NAMESER_COMPAT_H 1
+/* #define HAVE_ARPA_NAMESER_COMPAT_H */
+
+#ifndef INDIR_MASK
+#define INDIR_MASK 0xc0
+#endif
+#ifndef C_IN
+#define C_IN 1
+#endif
+#ifndef T_A
+#define T_A 1
+#endif
+#ifndef T_AAAA
+#define T_AAAA 28
+#endif 
+#ifndef T_PTR
+#define T_PTR 12
+#endif
+#ifndef MAXCDNAME
+#define MAXCDNAME 255
+#endif
+#ifndef NAMESERVER_PORT
+#define NAMESERVER_PORT 53
+#endif
+#ifndef HFIXEDSZ
+#define HFIXEDSZ 12
+#endif
+#ifndef QFIXEDSZ
+#define QFIXEDSZ 4
+#endif
+#ifndef QUERY
+#define QUERY 0
+#endif
+#ifndef MAXLABEL
+#define MAXLABEL 63
+#endif
+#ifndef RRFIXEDSZ
+#define RRFIXEDSZ 10
+#endif
+#ifndef T_CNAME
+#define T_CNAME 5
+#endif
+#ifndef T_MX
+#define T_MX 15
+#endif
+#ifndef T_NS
+#define T_NS 2
+#endif
+#ifndef T_TXT
+#define T_TXT 16
+#endif
+#ifndef PACKETSZ
+#define PACKETSZ 512
+#endif
+#ifndef SERVFAIL
+#define SERVFAIL 2
+#endif
+#ifndef NOTIMP
+#define NOTIMP 4
+#endif
+#ifndef REFUSED
+#define REFUSED 5
+#endif
+#ifndef NOERROR
+#define NOERROR 0
+#endif
+#ifndef FORMERR
+#define FORMERR 1
+#endif
+#ifndef NXDOMAIN
+#define NXDOMAIN 3
+#endif
+
+
 
 /* Define to 1 if you have the <arpa/nameser.h> header file. */
 #define HAVE_ARPA_NAMESER_H 1
@@ -510,4 +582,3 @@
 /* #undef ssize_t */
 
 #define HAVE_GETENV 1
-

@@ -56,8 +56,8 @@ extern "C" {
 
 #include "ares.h"
 
-#ifndef _SSIZE_T_
-typedef intptr_t ssize_t;
+#if !defined(_SSIZE_T_) && !defined(_SSIZE_T_DEFINED_)
+	typedef intptr_t ssize_t;
 #endif
 
 #if defined(__unix__) || defined(__POSIX__) || defined(__APPLE__)

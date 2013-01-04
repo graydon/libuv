@@ -25,6 +25,15 @@
 #include <string.h>
 #include <fcntl.h>
 
+#if defined(ANDROID)
+	#ifndef S_IWRITE
+	#define S_IWRITE 0200
+	#endif
+	#ifndef S_IREAD
+	#define S_IREAD 0400
+	#endif
+#endif
+
 static uv_fs_event_t fs_event;
 static uv_timer_t timer;
 static int timer_cb_called;

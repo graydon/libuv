@@ -92,6 +92,10 @@ thread_create (xthread_t *tid, void *(*proc)(void *), void *arg)
 #include <limits.h>
 #include <pthread.h>
 
+#if defined(ANDROID)
+	#include <asm/page.h>
+#endif
+
 typedef pthread_mutex_t xmutex_t;
 #if __linux && defined (PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP)
 # define X_MUTEX_INIT		PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP

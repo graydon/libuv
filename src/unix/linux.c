@@ -28,7 +28,9 @@
 #include <assert.h>
 #include <errno.h>
 
+#if !defined(ANDROID)
 #include <ifaddrs.h>
+#endif
 #include <net/if.h>
 #include <sys/param.h>
 #include <sys/sysinfo.h>
@@ -454,7 +456,7 @@ void uv_free_cpu_info(uv_cpu_info_t* cpu_infos, int count) {
   free(cpu_infos);
 }
 
-
+#if !defined(ANDROID)
 uv_err_t uv_interface_addresses(uv_interface_address_t** addresses,
   int* count) {
   struct ifaddrs *addrs, *ent;
@@ -521,6 +523,7 @@ uv_err_t uv_interface_addresses(uv_interface_address_t** addresses,
 
   return uv_ok_;
 }
+#endif
 
 
 void uv_free_interface_addresses(uv_interface_address_t* addresses,
